@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553759224663.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1479596376",
+    "id" : "25A8597B",
+    "lastKnownWriteTime" : 1553759218,
+    "last_content_update" : 1553759218,
+    "path" : "~/Documents/hotice.blog/hotice/config.toml",
+    "project_path" : "config.toml",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "toml"
+}
