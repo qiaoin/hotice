@@ -233,8 +233,8 @@ tags: ["6.828", "MIT", "Bootloader", "QEMU", "ELF", "STAB"]
 <p class="p7">回答以下 4 个问题：</p>
 <ul class="ul1">
   <li class="li8">At what point does the processor start executing 32-bit code? What exactly causes the switch from 16- to 32-bit mode?</li>
-  <li class="li9">使能保护模式（置<span class="s4"> CR0 </span>最低位为<span class="s4"> 1</span>）和段机制（建立好全局描述符表<span class="s4"> GDT</span>）。执行一条长跳转指令<span class="s4"> ljmp cs:eip </span>转而执行<span class="s4"> 32-bit mode</span></li>
 </ul>
+<p class="p9"><span class="Apple-converted-space">        </span>使能保护模式（置<span class="s4"> CR0 </span>最低位为<span class="s4"> 1</span>）和段机制（建立好全局描述符表<span class="s4"> GDT</span>）。执行一条长跳转指令<span class="s4"> ljmp cs:eip </span>转而执行<span class="s4"> 32-bit mode</span>
 <ul class="ul1">
   <li class="li8"><b>What</b> is the <b>last instruction</b> of the boot loader executed, and <b>what</b> is the <b>first instruction</b> of the kernel it just loaded?</li>
 </ul>
