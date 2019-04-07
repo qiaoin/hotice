@@ -233,25 +233,18 @@ tags: ["6.828", "MIT", "Bootloader", "QEMU", "ELF", "STAB"]
 <p class="p7">回答以下 4 个问题：</p>
 <ul class="ul1">
   <li class="li8">At what point does the processor start executing 32-bit code? What exactly causes the switch from 16- to 32-bit mode?</li>
-</ul>
-<p class="p9"><span class="Apple-converted-space">        </span>使能保护模式（置<span class="s4"> CR0 </span>最低位为<span class="s4"> 1</span>）和段机制（建立好全局描述符表<span class="s4"> GDT</span>）。执行一条长跳转指令<span class="s4"> ljmp cs:eip </span>转而执行<span class="s4"> 32-bit mode</span>
-<ul class="ul1">
+<p class="p9">使能保护模式（置<span class="s4"> CR0 </span>最低位为<span class="s4"> 1</span>）和段机制（建立好全局描述符表<span class="s4"> GDT</span>）。执行一条长跳转指令<span class="s4"> ljmp cs:eip </span>转而执行<span class="s4"> 32-bit mode</span>
   <li class="li8"><b>What</b> is the <b>last instruction</b> of the boot loader executed, and <b>what</b> is the <b>first instruction</b> of the kernel it just loaded?</li>
-</ul>
 <p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>call <span class="Apple-converted-space">  </span>*<b>0x10018</b></p>
 <p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span><b>0x10000c</b>: <span class="Apple-tab-span">	</span>movw <span class="Apple-converted-space">  </span>$0x1234,0x472</p>
-<p class="p9"><span class="Apple-converted-space">        </span>这两个地址不相同，这是为什么？因为开启了分页机制，虚拟地址与物理地址之间的映射关系已建立好</p>
-<ul class="ul1">
+<p class="p9">这两个地址不相同，这是为什么？因为开启了分页机制，虚拟地址与物理地址之间的映射关系已建立好</p>
   <li class="li8"><b>Where</b> is the <b>first instruction</b> of the kernel?</li>
-</ul>
 <p class="p8"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span><b>0x10000c</b></p>
-<ul class="ul1">
   <li class="li8">How does the boot loader decide how many <b>sectors</b> it must read in order to fetch the entire kernel from disk? <b>Where</b> does it find this information?</li>
+<p class="p12"><span class="Apple-converted-space">  </span>// load each program segment (ignores ph flags)</p>
+<p class="p14"><span class="s9">  </span><b>ph = (struct Proghdr *) ((uint8_t *) ELFHDR + ELFHDR-&gt;e_phoff);<span class="Apple-converted-space">  </span>// ii</b></p>
+<p class="p14"><b>  eph = ph + ELFHDR-&gt;e_phnum;</b></p>
 </ul>
-<p class="p12"><span class="Apple-converted-space">    </span>// load each program segment (ignores ph flags)</p>
-<p class="p14"><span class="s9">    </span><b>ph = (struct Proghdr *) ((uint8_t *) ELFHDR + ELFHDR-&gt;e_phoff);<span class="Apple-converted-space">  </span>// ii</b></p>
-<p class="p14"><b>    eph = ph + ELFHDR-&gt;e_phnum;</b></p>
-<p class="p16"><br></p>
 <p class="p5"><span class="s3"><b>Exercise 4. C 语言中的指针</b></span></p>
 <p class="p7"><span class="s4">C </span>程序设计语言<span class="s4"> </span>第<span class="s4"> 5 </span>章<span class="s4"> </span>数组与指针<span class="s4"> 5.1 - 5.5</span>（待读，之前已经看过好几遍了）</p>
 <h2 style="margin: 13.0px 0.0px 0.0px 0.0px; font: 18.0px Palatino; -webkit-text-stroke: #000000"><b>ELF 文件格式</b></h2>
