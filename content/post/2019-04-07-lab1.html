@@ -153,7 +153,7 @@ tags: ["6.828", "MIT", "Bootloader", "QEMU", "ELF", "STAB"]
   <li class="li9"><span class="s4"></span>把控制权转移给<span class="s4"> JOS</span>，即将<span class="s4"> CS:EIP </span>的值指向操作系统内核所在内存中的起始点（<span class="s4">.text </span>段中程序开始执行时的起始地址）</li>
 </ol>
 <p class="p7">两个源文件代码的阅读：（主要参考 <a href="http://grid.hust.edu.cn/zyshao/Teaching_Material/OSEngineering/Chapter3.pdf">系统启动与初始化</a>）</p>
-<p class="p7"><span class="s8"><b>boot/boot.S</b></span>：执行<span class="s4"> start </span>函数，进行一定的初始化，完成从实模式到保护模式的切换（CR0 最低位置 1），并调用<span class="s4"> bootmain </span>函数，具体细节参见 <span class="s4">bootloader </span>实模式切换到保护模式<span class="Apple-converted-space"> </span></p>
+<p class="p7"><span class="s8"><b>boot/boot.S</b></span>：执行<span class="s4"> start </span>函数，进行一定的初始化，完成从实模式到保护模式的切换（CR0 最低位置 1），并调用<span class="s4"> bootmain </span>函数，具体细节参见 <span class="s4">bootloader </span>实模式切换到保护模式（<span class="s4">Google</span> 一下）<span class="Apple-converted-space"> </span></p>
 <p class="p7"><span class="s8"><b>boot/main.c</b></span>：<span class="s4">bootloader </span>让<span class="s4"> CPU </span>进入保护模式后，下一步的工作就是<span class="s6"><b>从硬盘上加载并运行</b></span><span class="s7"><b> OS</b></span>。考虑到实现的简单性，<span class="s4">bootloader </span>的访问硬盘都是<span class="s4"> LBA </span>模式<span class="s4"> </span>的<span class="s4"> <b>PIO</b></span>（<span class="s4">Program IO</span>）方式，即<b>所有的</b><span class="s4"><b> IO </b></span><b>操作是通过</b><span class="s4"><b> CPU </b></span><b>访问硬盘的</b><span class="s4"><b> IO </b></span><b>地址寄存器完成</b>。当前硬盘数据是储存到硬盘扇区中，一个扇区大小为<span class="s4"> <b>512</b> </span>字节。读一个扇区的流程（可参看 <span class="s4">readsect </span>函数实现，大致理解就可以）大致如下：</p>
 <ol class="ol2">
   <li class="li9"><span class="s4"></span>等待磁盘准备好；</li>
