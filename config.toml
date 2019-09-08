@@ -28,9 +28,6 @@ footnotereturnlinkcontents = "↩"
     name = "标签"
     url = "/tags/"
     weight = 4
-# [[menu.main]]
-#    name = "Subscribe"
-#    url = "/index.xml"
 
 [params]
     # description = "A Hugo theme ported from the static site generator Ivy."
@@ -41,6 +38,6 @@ footnotereturnlinkcontents = "↩"
   highlightjsLang = ["r", "python", "julia",
                      "yaml", "tex", "markdown", "toml",
                      "postgres", "postgresql", "sql",
-                     "bash", "shell",
+                     "bash", "shell", "awk",
                      "cmake", "c", "makefile"]
   highlightjsTheme = "github"
