@@ -160,39 +160,39 @@ string + 0 # 字符串加上 0，将一个字符串转型为数字
 
 ### 模式匹配
 
-1. 在规则中指定模式，可以为字符串，也可以为任何扩展的正则表达式
+- 在规则中指定模式，可以为字符串，也可以为任何扩展的正则表达式
 
 ```awk
 awk '/green/ { print }' sample
 awk '/!.*!/' sample
 ```
 
-2. 在特定的字段中匹配模式，可以指定该字段并使用 `~` 操作符（表示包含），`!~`（表示不包含）
+- 在特定的字段中匹配模式，可以指定该字段并使用 `~` 操作符（表示包含），`!~`（表示不包含）
 
-    例如，打印那些登录 Shell 不是 bash 的所有用户的全名
+例如，打印那些登录 Shell 不是 bash 的所有用户的全名
 
 ```awk
 awk 'BEGIN {FS=":"} $7 !~ /bash/ {print $5}' /etc/passwd
 ```
 
-3. 使用布尔操作符连接不同的模式，与（`&&`），或（`||`），非（`!`）
-4. 范围模式：在两个模式之间使用逗号，可以指定一个范围，表示匹配位于这两种模式之间和模式本身的所有文本
+- 使用布尔操作符连接不同的模式，与（`&&`），或（`||`），非（`!`）
+- 范围模式：在两个模式之间使用逗号，可以指定一个范围，表示匹配位于这两种模式之间和模式本身的所有文本
 
 ```awk
 awk '/Heigh/,/folly/' sample
 ```
 
-5. 使用换行符作为字段分隔符，空字符串作为记录分隔符，AWK 会将整段内容作为一个记录，使其成为“段落 grep”，将输出匹配搜索的整段内容
+- 使用换行符作为字段分隔符，空字符串作为记录分隔符，AWK 会将整段内容作为一个记录，使其成为“段落 grep”，将输出匹配搜索的整段内容
 
 ```awk
 awk 'BEGIN { FS = "\n"; RS = "" } /green/' sample
 ```
 
-6. 模式中支持比较，例如，对数字的 `>` `<` `>=` `<=` 的比较，对数字或字符串的 `==` 的比较
+- 模式中支持比较，例如，对数字的 `>` `<` `>=` `<=` 的比较，对数字或字符串的 `==` 的比较
 
 ## 操作
 
-> Sometimes an action is very simple: a single print or assignment. Other times, it may be a sequence of several statements separated by **newlines** or **semicolons**.（一个操作中的多条语句使用换行符或分号进行分隔）
+> Sometimes an **action** is very simple: a single print or assignment. Other times, it may be a sequence of several statements separated by **newlines** or **semicolons**.（一个操作中的多条语句使用换行符或分号进行分隔）
 
 ![image.png](https://i.loli.net/2019/09/04/L3yAa1JNoPROhtk.png)
 
@@ -213,29 +213,29 @@ awk 'BEGIN { FS = "\n"; RS = "" } /green/' sample
 
 ## 运行 AWK 程序的几种方式
 
-- **命令行中运行**
+1.**命令行中运行**
 
 ```shell
 awk 'program' filename
 ```
 
-    **注意**：小心使用引号！AWK 中的变量，如 `$1` 表示字段，但在很多 Shell 中，这些字段是特殊变量，将转换为在命令行中给定的参数
+**注意**：小心使用引号！AWK 中的变量，如 `$1` 表示字段，但在很多 Shell 中，这些字段是特殊变量，将转换为在命令行中给定的参数
 
-- **与管道配合，作为筛选器运行**：可以与 Linux 上其他命令一起
+2.**与管道配合，作为筛选器运行**：可以与 Linux 上其他命令一起
 
 ```shell
 ps -ef | grep <正在运行的二进制名> | awk '{print $2}' | xargs kill -9
 ```
 
-- **将 AWK 程序保存在 `xxxx.awk` 文件中进行执行**：使用 `-f` 选项指定程序文件
+3.**将 AWK 程序保存在 `xxxx.awk` 文件中进行执行**：使用 `-f` 选项指定程序文件
 
 ```shell
 awk -f xxxx.awk filename
 ```
 
-    **注意**：由于 AWK 程序放在文件中，就不需要在 Shell 中使用引号将内容括起来
+**注意**：由于 AWK 程序放在文件中，就不需要在 Shell 中使用引号将内容括起来
 
-- **作为脚本运行**：与 3 类似，需要在 `xxxx.awk` 文件开始部分使用 shebang 命令（`#!/usr/bin/awk -f`），给脚本加上可执行权限 `chmod u+x xxxx.awk`， 然后运行即可
+4.**作为脚本运行**：与 3 类似，需要在 `xxxx.awk` 文件开始部分使用 shebang 命令（`#!/usr/bin/awk -f`），给脚本加上可执行权限 `chmod u+x xxxx.awk`， 然后运行即可
 
 ```shell
 ./xxxx.awk filename
@@ -256,7 +256,7 @@ AWK 的错误提示是以 `>>>` 和 `<<<` 来包围的
 awk '{ print NR, $NR }' sample
 ```
 
-    在 END 模式中使用它，以便输出输入中的行数：
+在 END 模式中使用它，以便输出输入中的行数：
 
 ```awk
 awk 'END { print "Input contains " NR " lines." }' sample
@@ -270,15 +270,15 @@ awk 'END { print "Input contains " NR " lines." }' sample
 awk 'BEGIN { FS = "!" } { print $1 }' sample
 ```
 
-    **注意**：
+**注意**：
 
-    1. 字段分隔符可以是单个字符，也可以是字符串，甚至是**任意的正则表达式**
+1.字段分隔符可以是单个字符，也可以是字符串，甚至是**任意的正则表达式**
 
 ```awk
 awk 'BEGIN { FS = "[Hh]eigh" } { print $2 }' sample
 ```
 
-    2. 通过在命令行中使用引号将字符串括起来，并作为 `-F` 选项的参数，也可以更改字段分隔符
+2.通过在命令行中使用引号将字符串括起来，并作为 `-F` 选项的参数，也可以更改字段分隔符
 
 ```awk
 awk -F ":" ' { print $5 } ' /etc/passwd
@@ -297,7 +297,7 @@ awk 'BEGIN { RS = "," } { print $1 }' sample
 awk 'BEGIN { ORS = "" } // { print } END { print "\n" }' sample
 ```
 
-    从文件中删除所有的换行，并将文件中所有的文本置于一行，只需 1）将输出记录分隔符更改为空字符，2）在结尾添加一个换行
+从文件中删除所有的换行，并将文件中所有的文本置于一行，只需 1）将输出记录分隔符更改为空字符，2）在结尾添加一个换行
 
 - `FILENAME` —— 该变量包含所读取的输入文件的名称
 - `IGNORECASE` —— 当其设置为非空值时，GAWK 将忽略模式匹配中的大小写
@@ -463,4 +463,3 @@ awk `NR != 1 { print > $6 }` netstat.txt
 ```shell
 netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr
 ```
-
